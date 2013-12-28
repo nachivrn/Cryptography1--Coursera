@@ -95,17 +95,26 @@ def strxor(a, b):     # xor two strings of different lengths
     else:
         return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a, b[:len(a)])])
 
-
 def update_key(derived_key):
-    master_key = ['_'] * len(hex_decoded_target)
-    for i in xrange(0, 10):
-        if i + 1 < 10:
-            key_xor = strxor(derived_key[i], derived_key[i + 1])
-        for k in xrange(0, len(key_xor)):
-            if key_xor[k] == strxor('a', 'a'):
-                master_key[k] = derived_key[i][k]
-    return ''.join(master_key)
+    master_key = [''] * len(hex_decoded_target)
+    key_xor_1 = strxor(derived_key[0], derived_key[1])
+    key_xor_2 = strxor(derived_key[5], derived_key[6])
+    for k in xrange(0, len(key_xor_1)):
+        if key_xor_1[k] == key_xor_2[k]:
+            master_key[k] = derived_key[0][k]
+        else:
+            master_key[k] = ''
 
+    for k in xrange(0, len(master_key)):
+        if master_key[k] != '':
+            continue
+        for i in xrange(1, 10):
+            if i + 1 < 10:
+                key_xor = strxor(derived_key[i], derived_key[i+1])
+                if key_xor[k] == strxor('a', 'a'):
+                    master_key[k] = derived_key[i][k]
+                    break
+    return ''.join(master_key)
 
 def get_key(messages):
     derived_keys = {}
