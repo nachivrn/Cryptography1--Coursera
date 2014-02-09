@@ -1,2 +1,3 @@
-crypto_exercises
+Cryptography1--Coursera
+by Dan Boneh
 ================
