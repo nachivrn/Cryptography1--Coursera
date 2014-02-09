@@ -1,3 +1,2 @@
-Cryptography1--Coursera
-by Dan Boneh
+Cryptography1--Coursera class taught by Dan Boneh
 ================
